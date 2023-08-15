@@ -19,10 +19,10 @@ namespace TestTask.Features.Home.ViewModels
         }
         public HomeViewModel(DataService conexion)
         {
-            _conexion =( conexion==null)?new DataService():conexion;
+            _conexion = (conexion == null) ? new DataService() : conexion;
         }
         public string Nombre { get; set; }
-        public List<Tests> Opcion { get; set; }
+        public string Opcion { get; set; }
         public SelectList ListadoOpciones
         {
             get
@@ -36,12 +36,12 @@ namespace TestTask.Features.Home.ViewModels
         {
             get
             {
-                if (String.IsNullOrEmpty(Nombre) || (Opcion.Count() == 0 || Opcion == null)) return false;
+                if (String.IsNullOrEmpty(Nombre) || (Opcion == null)) return false;
                 return true;
             }
         }
         public string Notificacion { get; set; }
 
-        
+
     }
 }

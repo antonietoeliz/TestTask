@@ -12,7 +12,7 @@ namespace TestTask.Core.DB.Models
         [BsonId]
         public ObjectId Id { get; set; }
 
-        public int IdentificadorPregunta { get; set; }
-        public int IdentificadorRespuesta { get; set; }
+        public int Pregunta_Id { get; set; }
+        public int Respuesta_Id { get; set; }
     }
 }

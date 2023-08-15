@@ -1,52 +1,59 @@
 ﻿@model TestTask.Features.Home.ViewModels.TestsViewModel
 
 <style>
-    .btn-checkbox label {
-        display: inline-block;
-        width: 100%;
-        padding: .375rem .75rem;
-        text-align: center;
-        white-space: nowrap;
-        vertical-align: middle;
-        cursor: pointer;
-        background-color: #fff;
-        border: 1px solid rgba(0, 0, 0, .125);
-        color: #495057;
-        border-radius: .25rem;
+    .custom-checkbox {
+        transition: background-color 0.3s ease-in-out; 
     }
 
-    .btn-checkbox input[type="checkbox"] {
-        position: absolute;
-        clip: rect(0, 0, 0, 0);
-    }
+        .custom-checkbox:focus-within, .custom-checkbox:hover {
+            background-color: #f0f0f0;
+        }
 
-        .btn-checkbox input[type="checkbox"]:checked + label {
-            background-color: #007bff;
+        .custom-checkbox input[type="checkbox"]:checked + span {
+            background-color: #007bff; 
             color: #fff;
         }
 </style>
+
+<script>
+    $(document).ready(function () {
+
+       
+        $(".custom-checkbox").click(function () {
+            $(this).next().toggleClass("checked");
+
+            var identificador = $(this).val();
+            console.log("Checkbox con identificador " + identificador + " ha sido clicado.");
+        });
+    });
+</script>
+@using (Html.BeginForm("TestSiguiente", "Home", FormMethod.Post))
+{
     <div class="container">
-        <h1>Checkboxes como Botones y Barra de Progreso</h1>
+        <h1>@Model.PreguntaActual.Descripcion</h1>
+
+
+
+        <div class="button-container">
+            @for (var i = 0; i < Model.PreguntaActual.RespuestasPregunta.Count; i++)
+            {
+                var elem = Model.PreguntaActual.RespuestasPregunta[i];
+
+                <label class="btn btn-checkbox custom-checkbox">
+                    <input type="checkbox" name="selectedOptions[@elem.Identificador]" value="@elem.Identificador" autocomplete="off">
+                    <span>@elem.Descripcion</span>
+                </label>
+            }
+        </div>
 
         <div class="progress">
             <div class="progress-bar" role="progressbar" style="width: @Model.PorcentajeProgreso%;"></div>
         </div>
 
-        <div class="button-container">
-            @for (int i = 0; i < Model.CantidadBotones; i++)
-            {
-                <div class="btn-group-toggle btn-checkbox" data-toggle="buttons">
-                    <input type="checkbox" autocomplete="off">
-                    Check @(i + 1)
-                </div>
-            }
-        </div>
-
-        @using (Html.BeginForm("Tests", "Home")) 
-        {
-            <button type="submit" class="btn btn-success">Ir a Otra Vista</button>
-        }
+        <button type="submit" class="btn btn-success">Siguiente</button>
+       
     </div>
+}
 
 
 
