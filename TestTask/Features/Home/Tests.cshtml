@@ -1,0 +1,52 @@
+﻿@model TestTask.Features.Home.ViewModels.TestsViewModel
+
+<style>
+    .btn-checkbox label {
+        display: inline-block;
+        width: 100%;
+        padding: .375rem .75rem;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        cursor: pointer;
+        background-color: #fff;
+        border: 1px solid rgba(0, 0, 0, .125);
+        color: #495057;
+        border-radius: .25rem;
+    }
+
+    .btn-checkbox input[type="checkbox"] {
+        position: absolute;
+        clip: rect(0, 0, 0, 0);
+    }
+
+        .btn-checkbox input[type="checkbox"]:checked + label {
+            background-color: #007bff;
+            color: #fff;
+        }
+</style>
+    <div class="container">
+        <h1>Checkboxes como Botones y Barra de Progreso</h1>
+
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: @Model.PorcentajeProgreso%;"></div>
+        </div>
+
+        <div class="button-container">
+            @for (int i = 0; i < Model.CantidadBotones; i++)
+            {
+                <div class="btn-group-toggle btn-checkbox" data-toggle="buttons">
+                    <input type="checkbox" autocomplete="off">
+                    Check @(i + 1)
+                </div>
+            }
+        </div>
+
+        @using (Html.BeginForm("Tests", "Home")) 
+        {
+            <button type="submit" class="btn btn-success">Ir a Otra Vista</button>
+        }
+    </div>
+
+
+
