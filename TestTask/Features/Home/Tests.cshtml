@@ -2,7 +2,11 @@
 
 <style>
     .custom-checkbox {
-        transition: background-color 0.3s ease-in-out; 
+        display: inline-block;
+        position: relative;
+        margin: 5px; /* Espacio entre los labels */
+        cursor: pointer;
+        transition: border-color 0.3s ease-in-out;
     }
 
         .custom-checkbox:focus-within, .custom-checkbox:hover {
@@ -10,29 +14,88 @@
         }
 
         .custom-checkbox input[type="checkbox"]:checked + span {
-            background-color: #007bff; 
+            background-color: #007bff;
             color: #fff;
         }
+
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .container {
+        text-align: center;
+        padding: 20px;
+        background-color: lightgray;
+    }
+
+    h1 {
+        margin-top: 0;
+        font-size:4em;
+    }
+
+    .button-container {
+        display: flex;
+        flex-wrap: wrap; /* Envolver los labels en varias líneas si es necesario */
+        justify-content: center; /* Centrar horizontalmente los labels */
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .progress {
+        width: 75%;
+        margin: 20px auto; 
+    }
+
+    button {
+        margin-top: 20px;
+        width: 200px;
+    }
+    input[type="checkbox"] {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+    label{
+        width:200px;
+        height:45px;
+    }
+    .custom-checkbox.checked {
+        background-color: #007bff; /* Color de fondo cuando el checkbox está marcado */
+        color: #fff; /* Cambiar el color del texto cuando está marcado */
+    }
+  
 </style>
 
 <script>
     $(document).ready(function () {
 
-       
-        $(".custom-checkbox").click(function () {
-            $(this).next().toggleClass("checked");
 
-            var identificador = $(this).val();
-            console.log("Checkbox con identificador " + identificador + " ha sido clicado.");
+        $(".custom-checkbox").click(function () {
+            $(this).next().toggleClass("checked");          
+        });
+        $(".custom-checkbox input[type='checkbox']").change(function () {
+            if ($(this).is(":checked")) {
+                $(this).parent().addClass("checked");
+            } else {
+                $(this).parent().removeClass("checked");
+            }
         });
     });
 </script>
-@using (Html.BeginForm("TestSiguiente", "Home", FormMethod.Post))
-{
-    <div class="container">
+<div class="container h-75">
+
+    <div class="row">
         <h1>@Model.PreguntaActual.Descripcion</h1>
+    </div>
 
 
+    @using (Html.BeginForm("TestSiguiente", "Home", FormMethod.Post))
+    {
 
         <div class="button-container">
             @for (var i = 0; i < Model.PreguntaActual.RespuestasPregunta.Count; i++)
@@ -40,7 +103,7 @@
                 var elem = Model.PreguntaActual.RespuestasPregunta[i];
 
                 <label class="btn btn-checkbox custom-checkbox">
-                    <input type="checkbox" name="selectedOptions[@elem.Identificador]" value="@elem.Identificador" autocomplete="off">
+                    <input type="checkbox" name="@elem.Identificador" value="@elem.Identificador" autocomplete="off">
                     <span>@elem.Descripcion</span>
                 </label>
             }
@@ -51,9 +114,10 @@
         </div>
 
         <button type="submit" class="btn btn-success">Siguiente</button>
-       
-    </div>
-}
 
+    }
+
+
+</div>
 
 

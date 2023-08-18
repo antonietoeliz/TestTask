@@ -4,17 +4,18 @@ using System.Linq;
 using System.Web;
 using System.Web.ModelBinding;
 using System.Web.Mvc;
+using TestTask.Core.Usuario;
 using TestTask.Features.Home.ViewModels;
 
 namespace TestTask.Features.Home
 {
+    [RoutePrefix("/")]
     public class HomeController : Controller
     {
         public HomeController()
         {
             
         }
-        // GET: Home
         public ActionResult Index(HomeViewModel modelo)
         {
             return View(modelo);
@@ -28,9 +29,10 @@ namespace TestTask.Features.Home
             }
             TestsViewModel testSeleccionado = new TestsViewModel(Convert.ToInt32(modelo.Opcion));
             TempData["ModeloTest"] = testSeleccionado;
+            Session["Usuario"] = new UserContext { Nombre = modelo.Nombre,IdentificadorTest= Convert.ToInt32(modelo.Opcion) };
             return RedirectToAction("Tests",modelo);
         }
-
+        
         public ActionResult Tests(TestsViewModel modelo)
         {
             if (modelo.TituloPregunta == null)
@@ -46,7 +48,15 @@ namespace TestTask.Features.Home
         {
             var modelo = (TestsViewModel)TempData["ModeloTest"];
             TempData.Keep();
-            var selectedOptions = form.GetValues("selectedOptions");
+            var selectedOptions = form.AllKeys;
+            if(selectedOptions.Length == 0) return RedirectToAction("Tests");
+            if (modelo.ComprobarRespuestasCorrectas(selectedOptions))
+            {
+                var usuario = (UserContext)Session["Usuario"];
+                usuario.NumeroRespuestasCorrectas++;
+                usuario.NumeroPreguntas=modelo.CantidadPaginas;
+                Session["Usuario"] = usuario;
+            } 
             var preguntaSiguiente=modelo.Pregunta();
             if (preguntaSiguiente == null) return RedirectToAction("Results");
             return RedirectToAction("Tests");
@@ -54,7 +64,8 @@ namespace TestTask.Features.Home
 
         public ActionResult Results()
         {
-            return View();
+            
+            return View(new ResultsViewModel((UserContext)Session["Usuario"]));
         }
     }
 }

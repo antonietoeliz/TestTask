@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Inicio de Sesión";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inicio de Sesión</title>
+</head>
+<body>
+    <div class="login-box">
+        <h2>Inicio de Sesión</h2>
+        @using (Html.BeginForm("Login", "Admin", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <input type="password" name="password" placeholder="Ingrese la contraseña">
+            <button type="submit">Ingresar</button>
+        }
+    </div>
+</body>
+</html>

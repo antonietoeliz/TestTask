@@ -1,10 +1,8 @@
-﻿using MongoDB.Driver;
-using System;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Web;
-using TestTask.Core.DB.Models;
+
 
 namespace TestTask.Core.DB
 {
@@ -17,25 +15,25 @@ namespace TestTask.Core.DB
             var cliente = new MongoClient(cadenaConexion);
             _BBDD = cliente.GetDatabase("TestTask");
         }
-        public List<Tests> ObtenerTests()
+        public List<T> ObtenerColeccion<T>(string nombreColeccion)
         {
-            return _BBDD.GetCollection<Tests>("Tests").Find(_ => true).ToList();
+            return _BBDD.GetCollection<T>(nombreColeccion).Find(_ => true).ToList();
         }
-        public List<Preguntas> ObtenerPreguntas()
+        public void Insertar<T>(string nombreColeccion, T objeto)
         {
-            return _BBDD.GetCollection<Preguntas>("Preguntas").Find(_ => true).ToList();
+            _BBDD.GetCollection<T>(nombreColeccion).InsertOne(objeto);
         }
-        public List<PreguntasRespuestas> ObtenerPreguntasRespuestas()
+
+        public void Actualizar<T>(string nombreColeccion, ObjectId id, T objeto)
         {
-            return _BBDD.GetCollection<PreguntasRespuestas>("PreguntasRespuestas").Find(_ => true).ToList();
+            var filter = Builders<T>.Filter.Eq("_id", id);
+            _BBDD.GetCollection<T>(nombreColeccion).ReplaceOne(filter, objeto);
         }
-        public List<TestPreguntas> ObtenerTestPreguntas()
+
+        public void Eliminar<T>(string nombreColeccion, ObjectId id)
         {
-            return _BBDD.GetCollection<TestPreguntas>("TestPreguntas").Find(_ => true).ToList();
-        }
-        public List<Respuestas> ObtenerRespuestas()
-        {
-            return _BBDD.GetCollection<Respuestas>("Respuestas").Find(_ => true).ToList();
+            var filter = Builders<T>.Filter.Eq("_id", id);
+            _BBDD.GetCollection<T>(nombreColeccion).DeleteOne(filter);
         }
     }
 }

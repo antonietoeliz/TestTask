@@ -1,17 +1,10 @@
-﻿@{
-    Layout = null;
-}
+﻿@model TestTask.Features.Home.ViewModels.ResultsViewModel
 
 <!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <div>
-    
+<div class="w-100 h-100 formularioPrincipal">
+    <div class="row" style="align-content:center;">
+        <h1 class="tituloPrincipal">Thank you,@Model.User.Nombre!</h1>
+        <p>You have answered correctly on @Model.User.NumeroRespuestasCorrectas out of @Model.User.NumeroPreguntas </p>
     </div>
-</body>
-</html>
+</div>
