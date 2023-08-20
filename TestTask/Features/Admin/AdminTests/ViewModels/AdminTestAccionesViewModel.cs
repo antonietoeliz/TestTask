@@ -25,9 +25,10 @@ namespace TestTask.Features.Admin.AdminTests.ViewModels
             TestActual = new Core.DB.Models.Tests();
             ListadoActual = new List<Core.DB.Models.Tests>();
         }
-        public void Insertar(string descripcion)
+        public void Insertar(int identificador, string descripcion)
         {
-            _dataService.Insertar<TestTask.Core.DB.Models.Tests>("Tests",new Core.DB.Models.Tests { Descripcion = descripcion });
+            if (_dataService.Existe<TestTask.Core.DB.Models.Tests>("Tests", identificador)) return;
+            _dataService.Insertar<TestTask.Core.DB.Models.Tests>("Tests", new Core.DB.Models.Tests { Identificador = identificador, Descripcion = descripcion });
 
 
         }
@@ -37,9 +38,9 @@ namespace TestTask.Features.Admin.AdminTests.ViewModels
 
 
         }
-        public void Actualizar(string id, string descripcion)
+        public void Actualizar(string id, int identificador, string descripcion)
         {
-            _dataService.Actualizar("Tests", TestActual.Id, descripcion);
+            _dataService.ActualizarExtendido<TestTask.Core.DB.Models.Tests>("Tests", id, identificador, descripcion);
 
 
         }

@@ -29,9 +29,9 @@ namespace TestTask.Features.Admin.AdminTests
         }
 
         [HttpPost]
-        public ActionResult _Create(string descripcion)
+        public ActionResult _Create(int identificador,string descripcion)
         {
-            ViewModel.Insertar(descripcion);
+            ViewModel.Insertar(identificador,descripcion);
             return RedirectToAction("Index");
         }
         [HttpGet]
@@ -39,20 +39,22 @@ namespace TestTask.Features.Admin.AdminTests
         public ActionResult _Edit(string id)
         {
             ObjectId objectId = new ObjectId(id);
+            ViewModel.CargarListado();
             ViewModel.TestActual = ViewModel.ListadoActual.Find(t => t.Id == objectId);
             return PartialView(ViewModel.TestActual);
         }
 
         [HttpPost]
-        public ActionResult _Edit(string id,string descripcion)
+        public ActionResult _Edit(string id,int identificador,string descripcion)
         {
-            ViewModel.Actualizar(id, descripcion);
+            ViewModel.Actualizar(id,identificador, descripcion);
             return RedirectToAction("Index");
         }
         [HttpGet]
         public ActionResult _Delete(string id)
         {
             ObjectId objectId = new ObjectId(id);
+            ViewModel.CargarListado();
             ViewModel.TestActual = ViewModel.ListadoActual.Find(t => t.Id == objectId);
             return PartialView(ViewModel.TestActual);
         }

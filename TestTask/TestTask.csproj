@@ -235,6 +235,14 @@
     <Content Include="Features\Admin\AdminTests\_Create.cshtml" />
     <Content Include="Features\Admin\AdminTests\_Delete.cshtml" />
     <Content Include="Features\Shared\LayoutEspecial.cshtml" />
+    <Content Include="Features\Admin\AdminPreguntas\_Create.cshtml" />
+    <Content Include="Features\Admin\AdminPreguntas\_Delete.cshtml" />
+    <Content Include="Features\Admin\AdminPreguntas\_Edit.cshtml" />
+    <Content Include="Features\Admin\AdminPreguntas\Index.cshtml" />
+    <Content Include="Features\Admin\AdminRespuestas\_Create.cshtml" />
+    <Content Include="Features\Admin\AdminRespuestas\_Delete.cshtml" />
+    <Content Include="Features\Admin\AdminRespuestas\_Edit.cshtml" />
+    <Content Include="Features\Admin\AdminRespuestas\Index.cshtml" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -258,6 +266,10 @@
     <Compile Include="Core\DB\Models\Tests.cs" />
     <Compile Include="Core\Usuario\UserContext.cs" />
     <Compile Include="Features\Admin\AdminController.cs" />
+    <Compile Include="Features\Admin\AdminPreguntas\AdminPreguntasController.cs" />
+    <Compile Include="Features\Admin\AdminPreguntas\ViewModels\AdminPreguntasAccionesViewModel.cs" />
+    <Compile Include="Features\Admin\AdminRespuestas\AdminRespuestasController.cs" />
+    <Compile Include="Features\Admin\AdminRespuestas\ViewModels\AdminRespuestasAccionesViewModel.cs" />
     <Compile Include="Features\Admin\AdminTests\AdminTestsController.cs" />
     <Compile Include="Features\Admin\AdminTests\ViewModels\AdminTestAccionesViewModel.cs" />
     <Compile Include="Features\Admin\ViewModels\AdminViewModel.cs" />
@@ -312,8 +324,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Features\Admin\AdminPreguntas\" />
-    <Folder Include="Features\Admin\AdminRespuestas\" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\AWSSDK.SecurityToken.3.7.100.14\analyzers\dotnet\cs\AWSSDK.SecurityToken.CodeAnalysis.dll" />

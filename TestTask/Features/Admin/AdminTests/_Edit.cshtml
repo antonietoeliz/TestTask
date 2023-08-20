@@ -1,6 +1,4 @@
-﻿@model  TestTask.Core.DB.Models.Tests
-
-
+﻿
 
 <div class="modal fade" id="myModalEdit" tabindex="-1" role="dialog" aria-labelledby="modalTitleEdit" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -14,12 +12,17 @@
             <div class="modal-body">
                 @using (Html.BeginForm("_Edit", "AdminTests", FormMethod.Post, new { @class = "form-horizontal" }))
                 {
-                    @Html.AntiForgeryToken()
-
+                    <input type="hidden" name="id" value="@Model.Id" />
                     <div class="form-group">
-                        @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <label class="control-label col-md-2" for="Identificador">Identificador</label>
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                            <input type="text" id="Identificador" name="Identificador" class="form-control" value="@Model.Identificador" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="Descripcion">Descripción</label>
+                        <div class="col-md-10">
+                            <input type="text" id="Descripcion" name="Descripcion" class="form-control" value="@Model.Descripcion" />
                         </div>
                     </div>
 
