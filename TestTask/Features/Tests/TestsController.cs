@@ -21,7 +21,6 @@ namespace TestTask.Features.Tests
                 modelo = (TestsViewModel)TempData["ModeloTest"];
                 TempData.Keep();
             }
-
             return View(modelo);
         }
         [HttpPost]
@@ -31,16 +30,19 @@ namespace TestTask.Features.Tests
             TempData.Keep();
             var selectedOptions = form.AllKeys;
             if (selectedOptions.Length == 0) return RedirectToAction("Tests");
-            if (modelo.ComprobarRespuestasCorrectas(selectedOptions))
+
+            var usuario = (UserContext)Session["Usuario"];
+
+            if (modelo.ComprobarRespuestasCorrectas(usuario.Nombre, selectedOptions))
             {
-                var usuario = (UserContext)Session["Usuario"];
                 usuario.NumeroRespuestasCorrectas++;
                 usuario.NumeroPreguntas = modelo.CantidadPaginas;
                 Session["Usuario"] = usuario;
             }
             var preguntaSiguiente = modelo.Pregunta();
-            if (preguntaSiguiente == null) return RedirectToAction("Results","Results");
+            if (preguntaSiguiente == null) return RedirectToAction("Results", "Results");
             return RedirectToAction("Tests");
         }
+
     }
 }

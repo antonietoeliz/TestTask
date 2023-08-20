@@ -249,6 +249,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Core\DB\DataService.cs" />
+    <Compile Include="Core\DB\Models\RespuestasUsuarios.cs" />
+    <Compile Include="Core\DB\Models\ResultadosUsuarios.cs" />
     <Compile Include="Core\DB\Models\TestPreguntas.cs" />
     <Compile Include="Core\DB\Models\PreguntasRespuestas.cs" />
     <Compile Include="Core\DB\Models\Respuestas.cs" />

@@ -9,36 +9,29 @@ namespace TestTask.Features.Admin.AdminTests
 {
     public class AdminTestsController : Controller
     {
-        private readonly DataService _dataService;
         private AdminTestAccionesViewModel ViewModel;
-        public AdminTestsController(DataService dataService)
+        public AdminTestsController()
         {
-            _dataService = new DataService();
             ViewModel = new AdminTestAccionesViewModel(new List<TestTask.Core.DB.Models.Tests>());
             
         }
-        public AdminTestsController()
-        {
-            _dataService = new DataService();
-            ViewModel = new AdminTestAccionesViewModel(new List<TestTask.Core.DB.Models.Tests>());
-        }
-
+       
         public ActionResult Index()
         {
-            ViewModel.ListadoActual=_dataService.ObtenerColeccion<TestTask.Core.DB.Models.Tests>("Tests");
+            ViewModel.CargarListado();
             return View(ViewModel);
         }
         [HttpGet]
         public ActionResult _Create()
         {
-            var viewModel = new TestTask.Core.DB.Models.Tests();
-            return PartialView("_Create", viewModel);
+            
+            return PartialView("_Create", ViewModel);
         }
 
         [HttpPost]
-        public ActionResult _Create(TestTask.Core.DB.Models.Tests tests)
+        public ActionResult _Create(string descripcion)
         {
-            _dataService.Insertar("Tests", tests);
+            ViewModel.Insertar(descripcion);
             return RedirectToAction("Index");
         }
         [HttpGet]
@@ -46,28 +39,28 @@ namespace TestTask.Features.Admin.AdminTests
         public ActionResult _Edit(string id)
         {
             ObjectId objectId = new ObjectId(id);
-            TestTask.Core.DB.Models.Tests test = ViewModel.ListadoActual.Find(t => t.Id == objectId);
-            return PartialView(test);
+            ViewModel.TestActual = ViewModel.ListadoActual.Find(t => t.Id == objectId);
+            return PartialView(ViewModel.TestActual);
         }
 
         [HttpPost]
-        public ActionResult _Edit(TestTask.Core.DB.Models.Tests test)
+        public ActionResult _Edit(string id,string descripcion)
         {
-            _dataService.Actualizar("Tests", test.Id, test);
+            ViewModel.Actualizar(id, descripcion);
             return RedirectToAction("Index");
         }
-
+        [HttpGet]
         public ActionResult _Delete(string id)
         {
             ObjectId objectId = new ObjectId(id);
-            TestTask.Core.DB.Models.Tests test = ViewModel.ListadoActual.Find(t => t.Id == objectId);
-            return PartialView(test);
+            ViewModel.TestActual = ViewModel.ListadoActual.Find(t => t.Id == objectId);
+            return PartialView(ViewModel.TestActual);
         }
 
         [HttpPost]
-        public ActionResult _Delete(TestTask.Core.DB.Models.Tests test)
+        public ActionResult _DeletePost(string id)
         {
-            _dataService.Eliminar<TestTask.Core.DB.Models.Tests>("Tests", test.Id);
+            ViewModel.Eliminar(new ObjectId(id));
             return RedirectToAction("Index");
         }
     }

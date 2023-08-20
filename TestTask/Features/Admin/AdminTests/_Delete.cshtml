@@ -1,5 +1,4 @@
-﻿@model TestTask.Core.DB.Models.Tests
-
+﻿
 <div class="modal fade" id="myModalDelete" tabindex="-1" role="dialog" aria-labelledby="modalTitleDelete" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -11,16 +10,14 @@
             </div>
             <div class="modal-body">
                 <p>¿Estás seguro de que deseas eliminar este test?</p>
-                @using (Html.BeginForm("_Delete", "AdminTests", FormMethod.Post, new { @class = "form-horizontal" }))
-                {
-                    @Html.AntiForgeryToken()
-                    @Html.HiddenFor(model => model.Id)
+                <form action="@Url.Action("_DeletePost", "AdminTests")" method="post" class="form-horizontal">
+                    <input type="hidden" name="Id" value="@Model.Id" />
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-danger">Eliminar</button>
                     </div>
-                }
+                </form>
             </div>
         </div>
     </div>

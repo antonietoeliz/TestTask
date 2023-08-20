@@ -69,15 +69,24 @@ namespace TestTask.Features.Tests.ViewModels
             return PreguntaActual;
         }
 
-        public bool ComprobarRespuestasCorrectas(string[] respuestas)
+
+        public bool ComprobarRespuestasCorrectas(string nombreUsuario, string[] respuestas)
         {
             if (respuestas == null) return false;
-            var numeroRespuestasCorrectasPregunta = PreguntaActual.RespuestasPregunta.Where(x => x.RespuestaCorrecta==true).Count();
-            if(respuestas.Length>numeroRespuestasCorrectasPregunta) return false;
+            var numeroRespuestasCorrectasPregunta = PreguntaActual.RespuestasPregunta.Where(x => x.RespuestaCorrecta == true).Count();
+            if (respuestas.Length > numeroRespuestasCorrectasPregunta) return false;
             int contadorRespuestasCorrectas = 0;
             for (int i = 0; i < respuestas.Length; i++)
             {
                 var consulta = _conexion.ObtenerColeccion<Respuestas>("Respuestas").Where(x => x.Identificador == Convert.ToInt32(respuestas[i])).First();
+                _conexion.Insertar<RespuestasUsuarios>("RespuestasUsuarios", new RespuestasUsuarios
+                {
+                    NombreUsuario = nombreUsuario,
+                    Test_Id = TestSeleccionado.Identificador,
+                    Pregunta_Id = PreguntaActual.Identificador,
+                    Respuesta_Id = Convert.ToInt32(respuestas[i]),
+                    FechaHoraRespuesta = DateTime.Now
+                });
                 if (consulta == null || !consulta.RespuestaCorrecta)
                 {
                     continue;
@@ -85,6 +94,7 @@ namespace TestTask.Features.Tests.ViewModels
                 contadorRespuestasCorrectas++;
 
             }
+
             if (contadorRespuestasCorrectas == numeroRespuestasCorrectasPregunta) return true;
             return false;
         }
