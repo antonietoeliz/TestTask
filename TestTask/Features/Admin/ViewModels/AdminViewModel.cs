@@ -15,8 +15,8 @@ namespace TestTask.Features.Admin.ViewModels
         }
         public bool ComprobarContraseña(string contraseñaIntroducida)
         {
-            string contrasenaAlmacenada = "hash";
-            return contrasenaAlmacenada == ComputeSHA256Hash(contrasenaAlmacenada);
+            string contrasenaAlmacenada = "59e7bc4a93901a909703506ae7ee5d2052af8545430aca7c35e4f553ba49b7e0";
+            return contrasenaAlmacenada == ComputeSHA256Hash(contraseñaIntroducida);
         }
 
         private string ComputeSHA256Hash(string input)

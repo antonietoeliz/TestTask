@@ -16,6 +16,19 @@ namespace TestTask.App_Start
             "~/Features/{1}/{0}.vbhtml",
             "~/Features/Shared/{0}.cshtml",
             "~/Features/Shared/{0}.vbhtml",
+            "~/Features/Admin/{0}.cshtml",
+            "~/Features/Admin/{1}/{0}.cshtml",
+            "~/Features/AdminTest/{0}.cshtml",
+        };
+            PartialViewLocationFormats = new[]
+       {
+            "~/Features/{1}/{0}.cshtml",
+            "~/Features/{1}/{0}.vbhtml",
+            "~/Features/Shared/{0}.cshtml",
+            "~/Features/Shared/{0}.vbhtml",
+            "~/Features/Admin/{0}.cshtml",
+            "~/Features/Admin/{1}/{0}.cshtml",
+            "~/Features/AdminTest/{0}.cshtml",
         };
         }
 

@@ -27,7 +27,7 @@ namespace TestTask.Features.Home.ViewModels
         {
             get
             {
-                List<Tests> tests = _conexion.ObtenerColeccion<Tests>("Tests");
+                List<Core.DB.Models.Tests> tests = _conexion.ObtenerColeccion<Core.DB.Models.Tests>("Tests");
                 return new SelectList(tests, "Identificador", "Descripcion");
             }
         }

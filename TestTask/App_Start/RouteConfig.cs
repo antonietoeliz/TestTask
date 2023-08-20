@@ -18,6 +18,12 @@ namespace TestTask
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller="Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+           name: "AdminTests",
+           url: "Admin/{controller}/{action}/{id}",
+           defaults: new { controller = "AdminTests", action = "Index", id = UrlParameter.Optional }
+       );
         }
     }
 }

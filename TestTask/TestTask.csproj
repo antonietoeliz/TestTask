@@ -225,11 +225,16 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Features\Home\Tests.cshtml" />
+    <Content Include="Features\Tests\Tests.cshtml" />
     <Content Include="libmongocrypt.so" />
     <Content Include="libmongocrypt.dylib" />
-    <Content Include="Features\Home\Results.cshtml" />
+    <Content Include="Features\Results\Results.cshtml" />
     <Content Include="Features\Admin\AdminView.cshtml" />
+    <Content Include="Features\Admin\AdminTests\_Edit.cshtml" />
+    <Content Include="Features\Admin\AdminTests\Index.cshtml" />
+    <Content Include="Features\Admin\AdminTests\_Create.cshtml" />
+    <Content Include="Features\Admin\AdminTests\_Delete.cshtml" />
+    <Content Include="Features\Shared\LayoutEspecial.cshtml" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -251,11 +256,15 @@
     <Compile Include="Core\DB\Models\Tests.cs" />
     <Compile Include="Core\Usuario\UserContext.cs" />
     <Compile Include="Features\Admin\AdminController.cs" />
+    <Compile Include="Features\Admin\AdminTests\AdminTestsController.cs" />
+    <Compile Include="Features\Admin\AdminTests\ViewModels\AdminTestAccionesViewModel.cs" />
     <Compile Include="Features\Admin\ViewModels\AdminViewModel.cs" />
     <Compile Include="Features\Home\HomeController.cs" />
     <Compile Include="Features\Home\ViewModels\HomeViewModel.cs" />
-    <Compile Include="Features\Home\ViewModels\ResultsViewModel.cs" />
-    <Compile Include="Features\Home\ViewModels\TestsViewModel.cs" />
+    <Compile Include="Features\Results\ResultsController.cs" />
+    <Compile Include="Features\Results\ViewModels\ResultsViewModel.cs" />
+    <Compile Include="Features\Tests\TestsController.cs" />
+    <Compile Include="Features\Tests\ViewModels\TestsViewModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -301,6 +310,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Features\Admin\AdminPreguntas\" />
+    <Folder Include="Features\Admin\AdminRespuestas\" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\AWSSDK.SecurityToken.3.7.100.14\analyzers\dotnet\cs\AWSSDK.SecurityToken.CodeAnalysis.dll" />

@@ -5,7 +5,7 @@ using System.Web;
 using TestTask.Core.DB;
 using TestTask.Core.DB.Models;
 
-namespace TestTask.Features.Home.ViewModels
+namespace TestTask.Features.Tests.ViewModels
 {
     public class TestsViewModel
     {
@@ -13,20 +13,20 @@ namespace TestTask.Features.Home.ViewModels
         public string TituloPregunta { get; set; }
         public int CantidadBotones { get; set; } = 3;
         public int CantidadPaginas { get; set; } = 0;
-        private Tests TestSeleccionado { get; set; }
+        private TestTask.Core.DB.Models.Tests TestSeleccionado { get; set; }
         public Preguntas PreguntaActual { get; set; }
         public int PorcentajeProgreso { get; set; } = 0;
 
         public TestsViewModel()
         {
-            TestSeleccionado = new Tests();
+            TestSeleccionado = new Core.DB.Models.Tests();
             PreguntaActual = new Preguntas();
             _conexion = new DataService();
 
         }
         public TestsViewModel(int testSeleccionado)
         {
-            TestSeleccionado = new Tests();
+            TestSeleccionado = new Core.DB.Models.Tests();
             PreguntaActual = new Preguntas();
             _conexion = new DataService();
 

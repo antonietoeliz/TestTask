@@ -6,6 +6,7 @@ using System.Web.ModelBinding;
 using System.Web.Mvc;
 using TestTask.Core.Usuario;
 using TestTask.Features.Home.ViewModels;
+using TestTask.Features.Tests.ViewModels;
 
 namespace TestTask.Features.Home
 {
@@ -30,42 +31,9 @@ namespace TestTask.Features.Home
             TestsViewModel testSeleccionado = new TestsViewModel(Convert.ToInt32(modelo.Opcion));
             TempData["ModeloTest"] = testSeleccionado;
             Session["Usuario"] = new UserContext { Nombre = modelo.Nombre,IdentificadorTest= Convert.ToInt32(modelo.Opcion) };
-            return RedirectToAction("Tests",modelo);
+            if (modelo.Nombre == "Admin") return RedirectToAction("AdminView", "Admin");
+            return RedirectToAction("Tests","Tests",modelo);
         }
-        
-        public ActionResult Tests(TestsViewModel modelo)
-        {
-            if (modelo.TituloPregunta == null)
-            {
-                modelo = (TestsViewModel)TempData["ModeloTest"];
-                TempData.Keep();
-            }
-            
-            return View(modelo);
-        }
-        [HttpPost]
-        public ActionResult TestSiguiente(FormCollection form)
-        {
-            var modelo = (TestsViewModel)TempData["ModeloTest"];
-            TempData.Keep();
-            var selectedOptions = form.AllKeys;
-            if(selectedOptions.Length == 0) return RedirectToAction("Tests");
-            if (modelo.ComprobarRespuestasCorrectas(selectedOptions))
-            {
-                var usuario = (UserContext)Session["Usuario"];
-                usuario.NumeroRespuestasCorrectas++;
-                usuario.NumeroPreguntas=modelo.CantidadPaginas;
-                Session["Usuario"] = usuario;
-            } 
-            var preguntaSiguiente=modelo.Pregunta();
-            if (preguntaSiguiente == null) return RedirectToAction("Results");
-            return RedirectToAction("Tests");
-        }
-
-        public ActionResult Results()
-        {
-            
-            return View(new ResultsViewModel((UserContext)Session["Usuario"]));
-        }
+       
     }
 }

@@ -1,22 +1,80 @@
 ﻿@{
     ViewBag.Title = "Inicio de Sesión";
-    Layout = null;
 }
+<style>
+    #contenedor::before {
+        background-image: url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');
+        background-repeat: no-repeat;
+        background-size: cover;
+        filter: blur(10px); /* Aplica el efecto de desenfoque solo a la imagen */
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Inicio de Sesión</title>
-</head>
-<body>
-    <div class="login-box">
-        <h2>Inicio de Sesión</h2>
-        @using (Html.BeginForm("Login", "Admin", FormMethod.Post))
-        {
-            @Html.AntiForgeryToken()
-            <input type="password" name="password" placeholder="Ingrese la contraseña">
-            <button type="submit">Ingresar</button>
-        }
+    #contenedor {
+        background-image: url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .formularioPrincipal {
+        margin: 0 auto;
+        padding: 20px;
+        background-color: lightgray;
+        max-width: 700px;
+        width: 80%;
+    }
+
+    .form-container {
+        padding: 20px;
+        text-align: center;
+    }
+
+    input, select {
+        width: 300px;
+        margin: 12px 0;
+        padding: 10px;
+        font-size: 20px;
+    }
+
+    form {
+        width: 100%;
+    }
+
+    button {
+        margin-top: 20px;
+        width: 200px;
+    }
+</style>
+    <div id="contenedor" class="w-100">
+        <div class="formularioPrincipal">
+            <div class="row" style="align-content:center;">
+                <h1 class="tituloPrincipal">Login</h1>
+            </div>
+            <div class="form-container col-12">
+                @using (Html.BeginForm("Login", "Admin", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <input type="password" name="password" class="form-control" placeholder="Ingrese la contraseña">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Ingresar</button>
+                }
+                <div class="alert-danger alert">
+                   Con 6 intentos de acceso fallidos se baneara permanentemente el acceso a la aplicación
+                </div>
+                
+            </div>
+        </div>
     </div>
-</body>
-</html>
+

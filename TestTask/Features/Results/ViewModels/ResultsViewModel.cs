@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using TestTask.Core.Usuario;
 
-namespace TestTask.Features.Home.ViewModels
+namespace TestTask.Features.Results.ViewModels
 {
     public class ResultsViewModel
     {
