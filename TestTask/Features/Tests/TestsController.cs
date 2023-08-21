@@ -32,11 +32,11 @@ namespace TestTask.Features.Tests
             if (selectedOptions.Length == 0) return RedirectToAction("Tests");
 
             var usuario = (UserContext)Session["Usuario"];
+            usuario.NumeroPreguntas = modelo.CantidadPaginas;
 
             if (modelo.ComprobarRespuestasCorrectas(usuario.Nombre, selectedOptions))
             {
                 usuario.NumeroRespuestasCorrectas++;
-                usuario.NumeroPreguntas = modelo.CantidadPaginas;
                 Session["Usuario"] = usuario;
             }
             var preguntaSiguiente = modelo.Pregunta();
