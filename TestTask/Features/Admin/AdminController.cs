@@ -27,15 +27,14 @@ namespace TestTask.Features.Admin
         public ActionResult Login(string password)
         {
             AdminViewModel viewModel = new AdminViewModel();
-            if (true)
-           // if (viewModel.ComprobarContraseña(password))
+            if (viewModel.ComprobarContraseña(password))
             {
                 return RedirectToAction("Index","AdminTests");
             }            
             else
             {
                 ViewBag.ErrorMessage = "Contraseña incorrecta.";
-                return View();
+                return View("AdminView");
             }
         }
        
