@@ -35,6 +35,7 @@ Este proyecto es una aplicación web desarrollada para realizar Tests. Permite a
 5. Abre tu navegador y accede a `http://localhost:puerto` para ver la aplicación en funcionamiento.
 
 ## Funcionamiento básico
+- En la carpeta /bbdd se encuentran los dumpfiles de la base de datos y un script para crearla manual
 - La base de datos solo almacena el nombre de la persona que realiza el test
 - Para acceder al panel de administración hay que introducir en el campo Nombre "Admin" y seleccionar cualquier test, le redirigirá a la pagina de login de la administración y tendrá que introducir la contraseña
 pass="ContraseñaSuperSegura"
